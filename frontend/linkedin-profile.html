@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates | CareerCompass AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+    <h2>CareerCompass AI</h2>
+    <nav><a href="dashboard.html">Dashboard</a><a href="portfolio.html">Portfolio</a></nav>
+</header>
+
+<main class="container">
+    <h1>Certificates and Achievements</h1>
+    <p>Maintain a list of certificates you have earned.</p>
+
+    <form id="certificateForm">
+        <label for="title">Certificate Name</label>
+        <input id="title" required placeholder="Example: Python Fundamentals">
+
+        <label for="issuer">Issuing Organization</label>
+        <input id="issuer" required placeholder="Organization name">
+
+        <label for="date">Date Earned</label>
+        <input id="date" type="date">
+
+        <label for="link">Certificate URL (optional)</label>
+        <input id="link" type="url" placeholder="https://example.com/certificate">
+
+        <button type="submit">Add Certificate</button>
+    </form>
+
+    <h2>My Certificates</h2>
+    <ul id="certificateList"></ul>
+</main>
+
+<script>
+const form = document.getElementById("certificateForm");
+const list = document.getElementById("certificateList");
+let certificates = JSON.parse(localStorage.getItem("ccai_certificates") || "[]");
+
+function render() {
+    list.replaceChildren();
+
+    certificates.forEach((cert, index) => {
+        const item = document.createElement("li");
+        const text = document.createElement("span");
+        text.textContent = `${cert.title} — ${cert.issuer} — ${cert.date || "Date not specified"} `;
+
+        item.appendChild(text);
+
+        if (cert.link) {
+            try {
+                const url = new URL(cert.link);
+                if (url.protocol === "https:" || url.protocol === "http:") {
+                    const link = document.createElement("a");
+                    link.href = url.href;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = "View Certificate";
+                    item.append(" ", link);
+                }
+            } catch (_) {}
+        }
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "Delete";
+        remove.addEventListener("click", () => {
+            certificates.splice(index, 1);
+            save();
+        });
+
+        item.append(" ", remove);
+        list.appendChild(item);
+    });
+}
+
+function save() {
+    localStorage.setItem("ccai_certificates", JSON.stringify(certificates));
+    render();
+}
+
+form.addEventListener("submit", event => {
+    event.preventDefault();
+    certificates.push({
+        title: document.getElementById("title").value.trim(),
+        issuer: document.getElementById("issuer").value.trim(),
+        date: document.getElementById("date").value,
+        link: document.getElementById("link").value.trim()
+    });
+    form.reset();
+    save();
+});
+
+render();
+</script>
+</body>
+</html>

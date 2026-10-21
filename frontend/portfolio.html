@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio | CareerCompass AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+    <h2>CareerCompass AI</h2>
+    <nav><a href="dashboard.html">Dashboard</a><a href="projects.html">Projects</a></nav>
+</header>
+
+<main class="container">
+    <h1>My Portfolio</h1>
+    <p>Present your skills, projects and achievements in one place.</p>
+
+    <form id="portfolioForm">
+        <label for="name">Full Name</label>
+        <input id="name" required placeholder="Your name">
+
+        <label for="headline">Professional Headline</label>
+        <input id="headline" placeholder="Computer Science Student">
+
+        <label for="skills">Skills</label>
+        <textarea id="skills" rows="3" placeholder="Python, SQL, HTML"></textarea>
+
+        <label for="projects">Projects</label>
+        <textarea id="projects" rows="3" placeholder="Project name and short description"></textarea>
+
+        <label for="github">GitHub Profile</label>
+        <input id="github" type="url" placeholder="https://github.com/username">
+
+        <label for="linkedin">LinkedIn Profile</label>
+        <input id="linkedin" type="url" placeholder="https://www.linkedin.com/in/username">
+
+        <button type="submit">Preview Portfolio</button>
+    </form>
+
+    <section id="preview" class="card" aria-live="polite"></section>
+</main>
+
+<script>
+document.getElementById("portfolioForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const get = id => document.getElementById(id).value.trim();
+    const preview = document.getElementById("preview");
+    preview.replaceChildren();
+
+    const title = document.createElement("h2");
+    title.textContent = get("name");
+
+    const headline = document.createElement("p");
+    headline.textContent = get("headline");
+
+    const skills = document.createElement("p");
+    skills.textContent = "Skills: " + get("skills");
+
+    const projects = document.createElement("p");
+    projects.textContent = "Projects: " + get("projects");
+
+    preview.append(title, headline, skills, projects);
+
+    for (const [label, id] of [["GitHub", "github"], ["LinkedIn", "linkedin"]]) {
+        const value = get(id);
+        if (value) {
+            try {
+                const url = new URL(value);
+                if (url.protocol === "https:" && (url.hostname === "github.com" ||
+                    url.hostname === "www.linkedin.com" || url.hostname === "linkedin.com")) {
+                    const link = document.createElement("a");
+                    link.href = url.href;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = label + " Profile";
+                    preview.append(document.createElement("br"), link);
+                }
+            } catch (_) {}
+        }
+    }
+});
+</script>
+</body>
+</html>

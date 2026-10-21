@@ -1,0 +1,165 @@
+/* CareerCompass AI - Dashboard */
+
+.container {
+    width: min(1100px, 92%);
+    margin: 35px auto;
+}
+
+.container h1 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.container > p {
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 28px 0;
+}
+
+.card {
+    background: #ffffff;
+    color: #20283a;
+    border: 1px solid #e4e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 5px 18px rgba(20, 35, 70, 0.06);
+    margin-bottom: 20px;
+}
+
+.card h2,
+.card h3 {
+    margin-top: 0;
+    line-height: 1.4;
+}
+
+.card p {
+    line-height: 1.7;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 4%;
+    background: #ffffff;
+    border-bottom: 1px solid #e4e8f0;
+}
+
+header h2 {
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+header nav a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+form {
+    max-width: 720px;
+    margin: 25px 0;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e4e8f0;
+    border-radius: 14px;
+}
+
+form label {
+    display: block;
+    margin: 16px 0 7px;
+    font-weight: 600;
+}
+
+input:not([type="checkbox"]),
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd3df;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #5146e5;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #3930b8;
+}
+
+a {
+    color: #5146e5;
+}
+
+ul li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+#message,
+#progress,
+#feedback {
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+@media (max-width: 850px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container h1 {
+        font-size: 1.6rem;
+    }
+
+    form {
+        padding: 16px;
+    }
+
+    header nav {
+        gap: 12px;
+    }
+}

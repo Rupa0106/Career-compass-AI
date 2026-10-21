@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | CareerCompass AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+    <h2>CareerCompass AI</h2>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Student Profile</h1>
+    <p>Tell us about yourself to personalize your career journey.</p>
+
+    <form id="profileForm">
+        <label for="branch">Branch</label>
+        <select id="branch" required>
+            <option value="CSE">Computer Science (CSE)</option>
+            <option value="IT">Information Technology</option>
+            <option value="ECE">Electronics and Communication</option>
+            <option value="EEE">Electrical and Electronics</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="year">Study Year</label>
+        <select id="year" required>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+        </select>
+
+        <label for="skills">Current Skills</label>
+        <input id="skills" placeholder="Python, Java, HTML, MySQL">
+
+        <label for="interests">Interests</label>
+        <input id="interests" placeholder="AI, Web Development, Data Science">
+
+        <label for="goal">Career Goal</label>
+        <select id="goal">
+            <option>Software Developer</option>
+            <option>AI Engineer</option>
+            <option>Data Scientist</option>
+            <option>Full Stack Developer</option>
+            <option>Cybersecurity Analyst</option>
+            <option>Cloud Engineer</option>
+        </select>
+
+        <label for="hours">Weekly Study Hours</label>
+        <input type="number" id="hours" min="1" max="168" value="10">
+
+        <button type="submit">Save Profile</button>
+        <p id="message" role="status"></p>
+    </form>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

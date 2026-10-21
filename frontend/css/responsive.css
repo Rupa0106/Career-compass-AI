@@ -1,0 +1,585 @@
+/* =========================================
+CareerCompass AI - Responsive Styles
+Mobile, Tablet and Laptop Support
+========================================= */
+
+/* 1. Small Laptops and Tablets */
+
+@media (max-width: 1100px) {
+
+```
+.navbar {
+    padding-left: 4%;
+    padding-right: 4%;
+    gap: 18px;
+}
+
+.nav-links {
+    gap: 20px;
+}
+
+.hero {
+    padding: 75px 5%;
+    gap: 35px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 5.2vw, 58px);
+    letter-spacing: -2.5px;
+}
+
+.hero-visual {
+    min-height: 420px;
+}
+
+.roadmap-card {
+    padding: 23px;
+}
+
+.floating-card-top {
+    right: -5px;
+}
+
+.floating-card-bottom {
+    left: -5px;
+}
+
+.features-section,
+.how-section {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.feature-card {
+    padding: 25px 22px;
+}
+
+.how-card {
+    padding: 27px;
+}
+```
+
+}
+
+/* 2. Tablets */
+
+@media (max-width: 900px) {
+
+```
+.navbar {
+    min-height: 75px;
+}
+
+.logo {
+    font-size: 17px;
+}
+
+.nav-links {
+    gap: 16px;
+}
+
+.nav-links a {
+    font-size: 12px;
+}
+
+.nav-actions {
+    gap: 8px;
+}
+
+.nav-actions .btn {
+    padding: 10px 14px;
+    font-size: 12px;
+}
+
+.hero {
+    min-height: auto;
+
+    grid-template-columns: 1fr;
+    gap: 45px;
+
+    padding-top: 75px;
+    padding-bottom: 85px;
+}
+
+.hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-badge {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero h1 {
+    max-width: 700px;
+    margin: 0 auto;
+
+    font-size: clamp(43px, 7vw, 62px);
+}
+
+.hero-description {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    justify-content: center;
+}
+
+.hero-trust {
+    justify-content: center;
+}
+
+.hero-visual {
+    width: 100%;
+    max-width: 520px;
+
+    margin: 0 auto;
+    min-height: 460px;
+}
+
+.roadmap-card {
+    max-width: 440px;
+}
+
+.floating-card-top {
+    right: -12px;
+}
+
+.floating-card-bottom {
+    left: -12px;
+}
+
+.features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.steps-grid {
+    gap: 18px;
+}
+
+.how-card {
+    padding: 23px;
+}
+
+.section-heading {
+    margin-bottom: 42px;
+}
+
+.features-section,
+.how-section {
+    padding-top: 80px;
+    padding-bottom: 85px;
+}
+
+.cta-section {
+    padding-bottom: 80px;
+}
+```
+
+}
+
+/* 3. Mobile Navigation and Layout */
+
+@media (max-width: 680px) {
+
+```
+.navbar {
+    min-height: 70px;
+
+    padding: 13px 5%;
+
+    gap: 12px;
+}
+
+.logo {
+    gap: 8px;
+    font-size: 16px;
+}
+
+.logo-icon {
+    width: 33px;
+    height: 33px;
+    font-size: 18px;
+}
+
+.menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.nav-links {
+    display: none;
+
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+
+    padding: 20px 5%;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+
+    box-shadow: var(--shadow-md);
+}
+
+.nav-links.nav-open {
+    display: flex;
+}
+
+.nav-links a {
+    padding: 13px 5px;
+
+    border-bottom: 1px solid #f0f0f6;
+
+    font-size: 14px;
+}
+
+.nav-links a:last-child {
+    border-bottom: none;
+}
+
+.nav-actions {
+    display: none;
+}
+
+.hero {
+    padding: 58px 5% 65px;
+    gap: 35px;
+}
+
+.hero-badge {
+    padding: 7px 11px;
+    margin-bottom: 21px;
+
+    font-size: 10px;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 9vw, 49px);
+    line-height: 1.17;
+    letter-spacing: -1.9px;
+}
+
+.hero-description {
+    margin-top: 20px;
+
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.hero-actions {
+    margin-top: 25px;
+    gap: 11px;
+}
+
+.btn-large {
+    min-height: 49px;
+    padding: 13px 17px;
+
+    font-size: 13px;
+}
+
+.hero-trust {
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.trust-item {
+    font-size: 10px;
+}
+
+.hero-visual {
+    min-height: 410px;
+    padding: 8px 0;
+}
+
+.roadmap-card {
+    padding: 21px 17px;
+    border-radius: 18px;
+}
+
+.card-header h2 {
+    font-size: 18px;
+}
+
+.card-label {
+    font-size: 9px;
+}
+
+.card-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 19px;
+}
+
+.roadmap-step {
+    grid-template-columns: 29px minmax(0, 1fr) auto;
+    gap: 9px;
+    padding-bottom: 20px;
+}
+
+.step-marker {
+    width: 29px;
+    height: 29px;
+    font-size: 11px;
+}
+
+.roadmap-step:not(:last-child)::after {
+    left: 13px;
+    top: 29px;
+}
+
+.step-content h3 {
+    font-size: 12px;
+}
+
+.step-content p {
+    font-size: 9px;
+}
+
+.step-status {
+    font-size: 8px;
+}
+
+.floating-card {
+    gap: 9px;
+    padding: 10px 12px;
+    border-radius: 12px;
+}
+
+.floating-card-top {
+    top: 0;
+    right: 0;
+}
+
+.floating-card-bottom {
+    bottom: 0;
+    left: 0;
+}
+
+.floating-icon {
+    width: 31px;
+    height: 31px;
+    font-size: 16px;
+}
+
+.floating-card strong {
+    font-size: 10px;
+}
+
+.floating-card p {
+    font-size: 9px;
+}
+
+.features-section,
+.how-section {
+    padding: 70px 5%;
+}
+
+.section-heading {
+    margin-bottom: 35px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+    letter-spacing: -1px;
+}
+
+.section-heading > p {
+    font-size: 13px;
+}
+
+.features-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.feature-card {
+    padding: 25px 22px;
+}
+
+.feature-icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 18px;
+    font-size: 21px;
+}
+
+.feature-card h3 {
+    font-size: 16px;
+}
+
+.feature-card p {
+    font-size: 13px;
+}
+
+.steps-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.how-card {
+    padding: 25px;
+}
+
+.how-number {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 19px;
+    font-size: 15px;
+}
+
+.how-card h3 {
+    font-size: 16px;
+}
+
+.how-card p {
+    font-size: 13px;
+}
+
+.cta-section {
+    padding: 0 5% 65px;
+}
+
+.cta-content {
+    padding: 48px 20px;
+    border-radius: 21px;
+}
+
+.cta-content h2 {
+    font-size: 31px;
+    letter-spacing: -1px;
+}
+
+.cta-content p {
+    font-size: 13px;
+}
+
+.footer {
+    padding: 28px 5%;
+
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+```
+
+}
+
+/* 4. Extra Small Mobile Screens */
+
+@media (max-width: 380px) {
+
+```
+.logo {
+    font-size: 14px;
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.hero h1 {
+    font-size: 35px;
+}
+
+.hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.hero-actions .btn {
+    width: 100%;
+}
+
+.hero-trust {
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-visual {
+    min-height: 390px;
+}
+
+.roadmap-card {
+    padding: 18px 12px;
+}
+
+.roadmap-step {
+    grid-template-columns: 27px minmax(0, 1fr);
+}
+
+.step-marker {
+    width: 27px;
+    height: 27px;
+}
+
+.roadmap-step:not(:last-child)::after {
+    left: 12px;
+    top: 27px;
+}
+
+.step-status {
+    display: none;
+}
+
+.floating-card {
+    padding: 9px;
+}
+
+.floating-card-top {
+    right: -3px;
+}
+
+.floating-card-bottom {
+    left: -3px;
+}
+
+.section-heading h2 {
+    font-size: 27px;
+}
+
+.cta-content h2 {
+    font-size: 27px;
+}
+```
+
+}
+
+/* 5. Landscape Mobile Screens */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+```
+.navbar {
+    position: relative;
+}
+
+.hero {
+    padding-top: 40px;
+    padding-bottom: 45px;
+}
+
+.hero-visual {
+    min-height: 380px;
+}
+```
+
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login | CareerCompass AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+<style>
+.google-logo {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+</style>
+
+</head>
+<body class="login-page">
+
+<a href="index.html" class="logo"><span class="logo-mark">C</span>CareerCompass AI</a>
+
+<main class="login-wrap">
+  <section class="l-left">
+    <span class="pill" style="align-self:flex-start"><i class="fa-solid fa-wand-magic-sparkles"></i> Welcome Back</span>
+    <h2>Continue <span>Your Journey</span></h2>
+    <p>Login to your CareerCompass AI account and take the next step towards your dream career.</p>
+
+    <div class="feat"><div class="ficon"><i class="fa-solid fa-bullseye"></i></div><div><b>Track Your Progress</b><small>Keep learning consistently</small></div></div>
+    <div class="feat"><div class="ficon"><i class="fa-solid fa-book-open"></i></div><div><b>Access AI Roadmaps</b><small>Get personalized guidance</small></div></div>
+    <div class="feat"><div class="ficon"><i class="fa-solid fa-chart-column"></i></div><div><b>Explore Opportunities</b><small>Build your career with confidence</small></div></div>
+
+    <!-- girl illustration: assets/images/girl.png -->
+    <img class="girl2" src="assets/images/girl.png" alt="" onerror="this.style.display='none'">
+  </section>
+
+  <section class="l-right">
+    <h1>Login</h1>
+    <p class="sub">Welcome back! Please enter your details to continue.</p>
+
+    <form id="loginForm">
+      <div class="input">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email address" autocomplete="email" required aria-label="Email address">
+      </div>
+      <div class="input">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password" required aria-label="Password">
+        <button type="button" class="eye" id="eye" aria-label="Show password"><i class="fa-regular fa-eye-slash"></i></button>
+      </div>
+      <div class="opts">
+        <label><input type="checkbox"> Remember me</label>
+        <a href="forgot.html">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary">Login <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+
+    <div class="or">OR</div>
+   
+    <p class="switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
+  </section>
+</main>
+
+<script>
+  const pw = document.getElementById('password');
+
+  document.getElementById('eye').addEventListener('click', function () {
+    const hide = pw.type === 'password';
+    pw.type = hide ? 'text' : 'password';
+
+    this.innerHTML = '<i class="fa-regular fa-eye' +
+      (hide ? '' : '-slash') + '"></i>';
+  });
+</script>
+
+<script src="js/api.js"></script>
+
+<script src="js/auth.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const googleButton = document.getElementById("googleLoginBtn");
+
+    if (!googleButton) return;
+
+    const GOOGLE_CLIENT_ID = "762522843992-a9kdlep25ubdfqu5fcugcjcmjlmursah.apps.googleusercontent.com";
+
+    function initializeGoogleLogin() {
+        if (!window.google || !google.accounts || !google.accounts.id) {
+            console.error("Google Identity Services did not load.");
+            googleButton.addEventListener("click", function () {
+                alert("Google Login load avvaledu. Page refresh chesi try cheyi.");
+            });
+            return;
+        }
+
+        google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+
+            callback: async function (response) {
+                try {
+                    googleButton.disabled = true;
+                    googleButton.textContent = "Signing in...";
+
+                    const result = await window.API.post(
+                        "/api/auth/google",
+                        { credential: response.credential }
+                    );
+
+                    localStorage.setItem("ccai_token", result.access_token);
+                    localStorage.setItem("ccai_user", JSON.stringify(result.user));
+
+                    window.location.href = "dashboard.html";
+
+                } catch (error) {
+                    console.error("Google login failed:", error);
+                    alert(error.message || "Google Login failed. Please try again.");
+
+                    googleButton.disabled = false;
+                    googleButton.textContent = "Continue with Google";
+                }
+            }
+        });
+
+        googleButton.addEventListener("click", function () {
+            google.accounts.id.prompt(function (notification) {
+                if (notification.isNotDisplayed()) {
+                    console.warn(
+                        "Google prompt not displayed:",
+                        notification.getNotDisplayedReason()
+                    );
+                }
+            });
+        });
+    }
+
+
+
+    initializeGoogleLogin();
+});
+</script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</body>
+</html>

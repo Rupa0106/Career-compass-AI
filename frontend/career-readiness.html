@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Profile Guide | CareerCompass AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+    <h2>CareerCompass AI</h2>
+    <nav><a href="dashboard.html">Dashboard</a><a href="portfolio.html">Portfolio</a></nav>
+</header>
+
+<main class="container">
+    <h1>LinkedIn Profile Improvement</h1>
+    <p>Use this checklist to improve your professional profile.</p>
+
+    <section class="card">
+        <h2>Profile Checklist</h2>
+        <label><input type="checkbox"> Add a professional profile photo.</label><br>
+        <label><input type="checkbox"> Write a clear headline.</label><br>
+        <label><input type="checkbox"> Add an About section.</label><br>
+        <label><input type="checkbox"> Add technical skills.</label><br>
+        <label><input type="checkbox"> Add projects and internships.</label><br>
+        <label><input type="checkbox"> Add certificates and achievements.</label><br>
+        <label><input type="checkbox"> Include your GitHub or portfolio link.</label><br>
+        <label><input type="checkbox"> Review spelling and profile visibility.</label>
+    </section>
+
+    <section class="card">
+        <h2>Headline Builder</h2>
+        <label for="role">Your Role or Goal</label>
+        <input id="role" placeholder="Computer Science Student">
+
+        <label for="skills">Top Skills</label>
+        <input id="skills" placeholder="Python, SQL, Generative AI">
+
+        <button id="generate" type="button">Generate Headline</button>
+        <p id="output" aria-live="polite"></p>
+        <button id="copy" type="button">Copy Headline</button>
+    </section>
+
+    <p>Always review suggestions before adding them to your LinkedIn profile.</p>
+</main>
+
+<script>
+const output = document.getElementById("output");
+
+document.getElementById("generate").addEventListener("click", () => {
+    const role = document.getElementById("role").value.trim();
+    const skills = document.getElementById("skills").value.trim();
+
+    if (!role) {
+        output.textContent = "Please enter your role or career goal.";
+        return;
+    }
+
+    output.textContent = skills
+        ? `${role} | Interested in ${skills} | Learning and Building Projects`
+        : `${role} | Learning, Building Projects and Growing Technical Skills`;
+});
+
+document.getElementById("copy").addEventListener("click", async () => {
+    if (!output.textContent) {
+        output.textContent = "Generate a headline first.";
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(output.textContent);
+        output.textContent += " — Copied!";
+    } catch (_) {
+        output.textContent += " — Please select and copy this text manually.";
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+/* ========================================
+   CareerCompass AI - Roadmap Styles
+   ======================================== */
+
+/* Main Container */
+.container {
+    width: min(1100px, 92%);
+    margin: 35px auto;
+    padding-bottom: 40px;
+}
+
+/* Page Heading */
+.container > h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #252b45;
+    margin-bottom: 12px;
+}
+
+.container > p {
+    color: #626b80;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* Roadmap Stage Cards */
+.card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e5e9f2;
+    border-left: 5px solid #635bff;
+    border-radius: 16px;
+    padding: 25px;
+    margin: 24px 0;
+    box-shadow: 0 5px 18px rgba(30, 40, 80, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(30, 40, 80, 0.1);
+}
+
+/* Stage Titles */
+.card h2 {
+    color: #292e52;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* Stage Descriptions */
+.card p {
+    color: #626b80;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+/* Roadmap Topics */
+.card ul {
+    padding-left: 24px;
+    margin-bottom: 18px;
+}
+
+.card li {
+    color: #424b60;
+    padding: 7px 0;
+    line-height: 1.6;
+}
+
+.card li::marker {
+    color: #635bff;
+}
+
+/* Links */
+.container a {
+    color: #5146e5;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.container a:hover {
+    color: #3025bd;
+    text-decoration: underline;
+}
+
+/* Buttons */
+.container button {
+    background: #635bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.container button:hover {
+    background: #4941d5;
+}
+
+.container button:focus-visible,
+.container a:focus-visible {
+    outline: 3px solid #aaa5ff;
+    outline-offset: 3px;
+}
+
+/* Roadmap Progress */
+.roadmap-progress {
+    width: 100%;
+    height: 10px;
+    background: #e8eaf3;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.roadmap-progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #635bff, #8b5cf6);
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+/* Stage Status */
+.roadmap-stage-status {
+    color: #5146e5;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Roadmap Input Fields */
+.container input:not([type="checkbox"]),
+.container select,
+.container textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d7dceb;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #252b45;
+    font-size: 1rem;
+    margin: 8px 0 16px;
+}
+
+.container input:focus,
+.container select:focus,
+.container textarea:focus {
+    outline: none;
+    border-color: #635bff;
+    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.12);
+}
+
+/* Stage Labels */
+.container label {
+    display: block;
+    color: #353b52;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Header Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 18px 4%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e9f2;
+}
+
+header h2 {
+    color: #292e52;
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+header nav a {
+    color: #424b60;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    color: #635bff;
+}
+
+/* Roadmap Result */
+#roadmapResult {
+    margin-top: 25px;
+    line-height: 1.7;
+}
+
+#roadmapResult h2,
+#roadmapResult h3 {
+    color: #292e52;
+}
+
+/* Empty or Loading States */
+.empty-state {
+    text-align: center;
+    padding: 35px 20px;
+    color: #626b80;
+    background: #f8f9fc;
+    border-radius: 14px;
+}
+
+/* Tablet */
+@media (max-width: 850px) {
+    .container {
+        width: 94%;
+    }
+
+    .container > h1 {
+        font-size: 1.9rem;
+    }
+
+    .card {
+        padding: 22px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+    .container {
+        margin: 22px auto;
+    }
+
+    .container > h1 {
+        font-size: 1.6rem;
+    }
+
+    .card {
+        padding: 17px;
+        margin: 18px 0;
+    }
+
+    .card h2 {
+        font-size: 1.2rem;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 4%;
+    }
+
+    header nav {
+        gap: 12px;
+    }
+
+    .container button {
+        width: 100%;
+    }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

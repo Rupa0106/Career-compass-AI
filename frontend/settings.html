@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Readiness | CareerCompass AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+    <h2>CareerCompass AI</h2>
+    <nav><a href="dashboard.html">Dashboard</a><a href="roadmap.html">Roadmap</a></nav>
+</header>
+
+<main class="container">
+    <h1>Career Readiness Self-Assessment</h1>
+    <p>Evaluate your preparation using this self-assessment checklist.</p>
+
+    <form id="readinessForm">
+        <label><input type="checkbox" name="item"> I can write programs in at least one language.</label><br>
+        <label><input type="checkbox" name="item"> I understand basic data structures and algorithms.</label><br>
+        <label><input type="checkbox" name="item"> I can use SQL and understand databases.</label><br>
+        <label><input type="checkbox" name="item"> I understand Git and GitHub basics.</label><br>
+        <label><input type="checkbox" name="item"> I have built practical projects.</label><br>
+        <label><input type="checkbox" name="item"> I can explain my projects clearly.</label><br>
+        <label><input type="checkbox" name="item"> I have a resume and portfolio.</label><br>
+        <label><input type="checkbox" name="item"> I practice technical interview questions.</label><br>
+        <label><input type="checkbox" name="item"> I can communicate my ideas clearly.</label><br>
+        <label><input type="checkbox" name="item"> I have researched roles I want to apply for.</label><br><br>
+
+        <button type="submit">Calculate Self-Assessment</button>
+    </form>
+
+    <section class="card">
+        <h2 id="score">Assessment not completed</h2>
+        <p id="feedback" aria-live="polite"></p>
+    </section>
+</main>
+
+<script>
+document.getElementById("readinessForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const items = [...document.querySelectorAll('input[name="item"]')];
+    const completed = items.filter(item => item.checked).length;
+    const score = Math.round((completed / items.length) * 100);
+
+    document.getElementById("score").textContent = `Self-assessment: ${score}%`;
+    document.getElementById("feedback").textContent =
+        `${completed} of ${items.length} preparation areas checked. ` +
+        (score === 100
+            ? "Review your skills regularly and practice interviews."
+            : "Use the unchecked areas to plan your next learning steps.") +
+        " This is a self-assessment, not a guarantee of job readiness.";
+});
+</script>
+</body>
+</html>

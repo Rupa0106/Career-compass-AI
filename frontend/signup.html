@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | CareerCompass AI</title>
+
+    <meta
+        name="description"
+        content="Create your CareerCompass AI account and start building your personalized career roadmap."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="auth-page">
+
+    <main class="auth-container">
+
+        <!-- Welcome Section -->
+        <section class="auth-promo">
+
+            <a href="index.html" class="logo auth-logo">
+                <span class="logo-icon">C</span>
+                <span>CareerCompass<span class="gradient-text"> AI</span></span>
+            </a>
+
+            <div class="promo-content">
+
+                <span class="hero-badge">Start Your Journey</span>
+
+                <h1>
+                    Your Future Starts
+                    <span class="gradient-text">Here.</span>
+                </h1>
+
+                <p>
+                    Create your free account and discover a personalized
+                    learning path designed around your skills, interests,
+                    and career goals.
+                </p>
+
+                <div class="promo-benefits">
+
+                    <div class="promo-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <h3>Personalized Roadmaps</h3>
+                            <p>Learn the right skills in the right order.</p>
+                        </div>
+                    </div>
+
+                    <div class="promo-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <h3>Explore AI Skills</h3>
+                            <p>Discover emerging technologies and tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="promo-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <h3>Track Your Progress</h3>
+                            <p>Turn your learning goals into achievements.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="promo-footer">
+                Build skills. Build projects. Build your future.
+            </div>
+
+        </section>
+
+        <!-- Signup Form -->
+        <section class="auth-form-section">
+
+            <div class="auth-form-wrapper">
+
+                <div class="auth-mobile-logo">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">C</span>
+                        <span>CareerCompass<span class="gradient-text"> AI</span></span>
+                    </a>
+                </div>
+
+                <div class="auth-heading">
+                    <span class="section-label">CREATE YOUR ACCOUNT</span>
+                    <h2>Get Started for Free</h2>
+                    <p>
+                        Join CareerCompass AI and start planning your future.
+                    </p>
+                </div>
+
+                <!-- Signup Status -->
+                <div
+                    id="signupMessage"
+                    class="auth-message"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                ></div>
+
+                <form id="signupForm" novalidate>
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            class="form-control"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            minlength="2"
+                            maxlength="80"
+                            required
+                        >
+
+                        <small class="field-error" id="nameError"></small>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            name="email"
+                            class="form-control"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            maxlength="254"
+                            required
+                        >
+
+                        <small class="field-error" id="emailError"></small>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="signupPassword"
+                                name="password"
+                                class="form-control"
+                                placeholder="Create a strong password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                maxlength="128"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-password-target="signupPassword"
+                                aria-label="Show password"
+                            >Show</button>
+                        </div>
+
+                        <small class="form-help">
+                            Use at least 8 characters with uppercase,
+                            lowercase, a number, and a special character.
+                        </small>
+
+                        <small class="field-error" id="passwordError"></small>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                class="form-control"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                maxlength="128"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-password-target="confirmPassword"
+                                aria-label="Show confirm password"
+                            >Show</button>
+                        </div>
+
+                        <small
+                            class="field-error"
+                            id="confirmPasswordError"
+                        ></small>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="terms-group">
+                        <label class="checkbox-label" for="acceptTerms">
+                            <input
+                                type="checkbox"
+                                id="acceptTerms"
+                                name="acceptTerms"
+                                required
+                            >
+
+                            <span>
+                                I agree to the
+                                <a href="#terms" id="termsLink">
+                                    Terms and Conditions
+                                </a>
+                                and
+                                <a href="#privacy" id="privacyLink">
+                                    Privacy Policy
+                                </a>.
+                            </span>
+                        </label>
+
+                        <small class="field-error" id="termsError"></small>
+                    </div>
+
+                    <!-- Submit -->
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block auth-submit"
+                        id="signupButton"
+                    >
+                        Create Account
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="login.html">Log in</a>
+                </p>
+
+                <div class="auth-divider">
+                    <span>YOUR CAREER JOURNEY STARTS HERE</span>
+                </div>
+
+                <p class="auth-legal">
+                    By creating an account, you agree to use
+                    CareerCompass AI responsibly.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Signup Logic -->
+    <script src="js/api.js"></script>
+
+    <script>
+        const signupForm = document.getElementById("signupForm");
+        const signupMessage = document.getElementById("signupMessage");
+
+        const nameInput = document.getElementById("fullName");
+        const emailInput = document.getElementById("signupEmail");
+        const passwordInput = document.getElementById("signupPassword");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+
+        const termsCheckbox = document.getElementById("acceptTerms");
+        const signupButton = document.getElementById("signupButton");
+
+        function showFieldError(id, message) {
+            document.getElementById(id).textContent = message;
+        }
+
+        function clearErrors() {
+            document.querySelectorAll(".field-error").forEach(function (field) {
+                field.textContent = "";
+            });
+
+            signupMessage.textContent = "";
+            signupMessage.hidden = true;
+            signupMessage.classList.remove("success", "error");
+        }
+
+        // Show / Hide Password
+        document.querySelectorAll("[data-password-target]").forEach(
+            function (button) {
+                button.addEventListener("click", function () {
+                    const targetId = button.dataset.passwordTarget;
+                    const field = document.getElementById(targetId);
+                    const showPassword = field.type === "password";
+
+                    field.type = showPassword ? "text" : "password";
+                    button.textContent = showPassword ? "Hide" : "Show";
+
+                    button.setAttribute(
+                        "aria-label",
+                        showPassword ? "Hide password" : "Show password"
+                    );
+                });
+            }
+        );
+
+        // Signup and backend registration
+        signupForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            clearErrors();
+
+            const fullName = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            let valid = true;
+
+            if (fullName.length < 2) {
+                showFieldError("nameError", "Please enter your full name.");
+                valid = false;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                showFieldError("emailError", "Please enter a valid email address.");
+                valid = false;
+            }
+
+            const strongPassword =
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,128}$/;
+
+            if (!strongPassword.test(password)) {
+                showFieldError(
+                    "passwordError",
+                    "Use 8+ characters with uppercase, lowercase, number and special character."
+                );
+                valid = false;
+            }
+
+            if (password !== confirmPassword) {
+                showFieldError(
+                    "confirmPasswordError",
+                    "Passwords do not match."
+                );
+                valid = false;
+            }
+
+            if (!termsCheckbox.checked) {
+                showFieldError(
+                    "termsError",
+                    "Please accept the Terms and Conditions."
+                );
+                valid = false;
+            }
+
+            if (!valid) {
+                return;
+            }
+
+            if (typeof API === "undefined" || typeof API.post !== "function") {
+                signupMessage.textContent =
+                    "API setup error. Please check frontend/js/api.js.";
+                signupMessage.classList.add("error");
+                signupMessage.hidden = false;
+                return;
+            }
+
+            signupButton.disabled = true;
+            signupButton.textContent = "Creating Account...";
+
+            signupMessage.textContent = "Creating your account...";
+            signupMessage.hidden = false;
+
+            try {
+                const result = await API.post("/api/auth/register", {
+                    full_name: fullName,
+                    email: email,
+                    password: password
+                });
+
+                signupMessage.textContent =
+                    "Account created successfully! Redirecting to login...";
+                signupMessage.classList.add("success");
+
+                setTimeout(function () {
+                    window.location.href = "login.html";
+                }, 1000);
+
+            } catch (error) {
+                signupMessage.textContent =
+                    error.message || "Registration failed. Please try again.";
+
+                signupMessage.classList.add("error");
+                signupMessage.hidden = false;
+
+            } finally {
+                signupButton.disabled = false;
+                signupButton.innerHTML =
+                    'Create Account <span aria-hidden="true">→</span>';
+            }
+        });
+
+        // Clear errors as the user edits fields
+        [
+            nameInput,
+            emailInput,
+            passwordInput,
+            confirmPasswordInput
+        ].forEach(function (input) {
+            input.addEventListener("input", function () {
+                const errorIds = {
+                    fullName: "nameError",
+                    signupEmail: "emailError",
+                    signupPassword: "passwordError",
+                    confirmPassword: "confirmPasswordError"
+                };
+
+                if (errorIds[input.id]) {
+                    showFieldError(errorIds[input.id], "");
+                }
+            });
+        });
+
+        termsCheckbox.addEventListener("change", function () {
+            showFieldError("termsError", "");
+        });
+
+        document.getElementById("termsLink").addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("Terms and Conditions page will be added later.");
+        });
+
+        document.getElementById("privacyLink").addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("Privacy Policy page will be added later.");
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Gap Analysis | CareerCompass AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+    <h2>CareerCompass AI</h2>
+    <nav><a href="dashboard.html">Dashboard</a><a href="profile.html">Profile</a></nav>
+</header>
+
+<main class="container">
+    <h1>Skill Gap Analysis</h1>
+    <p>Compare your existing skills with a target career's suggested skills.</p>
+
+    <form id="skillGapForm">
+        <label for="goal">Target Role</label>
+        <select id="goal">
+            <option value="Software Developer">Software Developer</option>
+            <option value="Full Stack Developer">Full Stack Developer</option>
+            <option value="AI Engineer">AI Engineer</option>
+            <option value="Data Analyst">Data Analyst</option>
+        </select>
+
+        <label for="current">Your Current Skills</label>
+        <textarea id="current" rows="4" placeholder="Python, SQL, HTML"></textarea>
+
+        <button type="submit">Analyze Skills</button>
+    </form>
+
+    <section id="result" class="card" aria-live="polite"></section>
+</main>
+
+<script>
+const requirements = {
+    "Software Developer": ["Programming", "DSA", "SQL", "Git", "Projects"],
+    "Full Stack Developer": ["HTML", "CSS", "JavaScript", "Backend", "SQL", "Git"],
+    "AI Engineer": ["Python", "Math", "Machine Learning", "Data Handling", "Projects"],
+    "Data Analyst": ["SQL", "Python", "Statistics", "Data Visualization", "Projects"]
+};
+
+document.getElementById("skillGapForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const role = document.getElementById("goal").value;
+    const current = document.getElementById("current").value
+        .split(",").map(skill => skill.trim().toLowerCase()).filter(Boolean);
+
+    const required = requirements[role];
+    const matched = required.filter(skill =>
+        current.some(item => item.includes(skill.toLowerCase()) ||
+                             skill.toLowerCase().includes(item))
+    );
+    const missing = required.filter(skill => !matched.includes(skill));
+    const score = Math.round((matched.length / required.length) * 100);
+
+    document.getElementById("result").innerHTML = `
+        <h2>Analysis Results</h2>
+        <p>Target role: ${role}</p>
+        <p>Suggested skill coverage: ${score}%</p>
+        <h3>Skills to focus on</h3>
+        <p>${missing.length ? missing.join(", ") : "You entered all the listed skills."}</p>
+        <p>These results are a basic local comparison, not an official job-readiness score.</p>
+    `;
+});
+</script>
+</body>
+</html>
