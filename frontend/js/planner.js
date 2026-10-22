@@ -1,14 +1,16 @@
-```javascript
 /* CareerCompass AI - Study Planner */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("taskForm");
     const taskInput = document.getElementById("task");
     const dateInput = document.getElementById("date");
     const list = document.getElementById("taskList");
     const progress = document.getElementById("progress");
 
-    if (!form || !taskInput || !dateInput || !list) return;
+    if (!form || !taskInput || !dateInput || !list) {
+        console.error("Study Planner elements not found.");
+        return;
+    }
 
     let tasks = [];
 
@@ -30,59 +32,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let completed = 0;
 
-        tasks.forEach(task => {
-            if (task.is_completed) completed++;
+        tasks.forEach(function (task) {
+            if (task.is_completed) {
+                completed++;
+            }
 
             const item = document.createElement("li");
 
+            // Task completion checkbox
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.checked = task.is_completed;
-            checkbox.setAttribute("aria-label", `Complete ${task.title}`);
+            checkbox.checked = Boolean(task.is_completed);
+            checkbox.setAttribute(
+                "aria-label",
+                "Complete " + task.title
+            );
 
-            checkbox.addEventListener("change", async () => {
+            checkbox.addEventListener("change", async function () {
                 checkbox.disabled = true;
 
                 try {
-                    const updated = await API.request(`/api/tasks/${task.id}`, {
-                        method: "PATCH",
-                        body: JSON.stringify({
-                            is_completed: checkbox.checked
-                        })
-                    });
+                    const updated = await API.request(
+                        "/api/tasks/" + task.id,
+                        {
+                            method: "PATCH",
+                            body: JSON.stringify({
+                                is_completed: checkbox.checked
+                            })
+                        }
+                    );
 
                     task.is_completed = updated.is_completed;
+
                     showMessage("Task status updated.");
                     renderTasks();
+
                 } catch (error) {
-                    checkbox.checked = task.is_completed;
+                    checkbox.checked = Boolean(task.is_completed);
                     checkbox.disabled = false;
-                    showMessage(`Could not update task: ${error.message}`);
+
+                    showMessage(
+                        "Could not update task: " + error.message
+                    );
                 }
             });
 
+            // Task title and deadline
             const title = document.createElement("span");
-            title.textContent =
-                ` ${task.title} — Deadline: ${task.due_date || "Not set"}`;
 
+            title.textContent =
+                " " + task.title +
+                " — Deadline: " + (task.due_date || "Not set");
+
+            // Delete button
             const removeButton = document.createElement("button");
             removeButton.type = "button";
             removeButton.textContent = "Delete";
 
-            removeButton.addEventListener("click", async () => {
+            removeButton.addEventListener("click", async function () {
                 removeButton.disabled = true;
 
                 try {
-                    await API.request(`/api/tasks/${task.id}`, {
-                        method: "DELETE"
+                    await API.request(
+                        "/api/tasks/" + task.id,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+                    tasks = tasks.filter(function (item) {
+                        return item.id !== task.id;
                     });
 
-                    tasks = tasks.filter(item => item.id !== task.id);
                     showMessage("Task deleted.");
                     renderTasks();
+
                 } catch (error) {
                     removeButton.disabled = false;
-                    showMessage(`Could not delete task: ${error.message}`);
+
+                    showMessage(
+                        "Could not delete task: " + error.message
+                    );
                 }
             });
 
@@ -91,21 +121,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (progress) {
-            progress.textContent = `Completed: ${completed} / ${tasks.length}`;
+            progress.textContent =
+                "Completed: " + completed + " / " + tasks.length;
         }
     }
 
+    // Load existing tasks
     async function loadTasks() {
         try {
-            tasks = await API.get("/api/tasks/");
+            const result = await API.get("/api/tasks/");
+
+            tasks = Array.isArray(result) ? result : [];
+
             renderTasks();
             showMessage("Tasks loaded from your account.");
+
         } catch (error) {
-            showMessage(`Could not load tasks: ${error.message}`);
+            showMessage(
+                "Could not load tasks: " + error.message
+            );
         }
     }
 
-    form.addEventListener("submit", async event => {
+    // Add a new task
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const title = taskInput.value.trim();
@@ -118,26 +157,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const submitButton = form.querySelector('[type="submit"]');
 
-        if (submitButton) submitButton.disabled = true;
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
 
         try {
             const created = await API.post("/api/tasks/", {
-                title,
+                title: title,
                 description: "",
                 due_date: date || null
             });
 
             tasks.unshift(created);
+
             form.reset();
             renderTasks();
+
             showMessage("Task saved to the database.");
+
         } catch (error) {
-            showMessage(`Could not save task: ${error.message}`);
+            showMessage(
+                "Could not save task: " + error.message
+            );
+
         } finally {
-            if (submitButton) submitButton.disabled = false;
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
         }
     });
 
     loadTasks();
 });
-```

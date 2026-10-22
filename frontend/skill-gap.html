@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,67 +7,593 @@
     <title>Skill Gap Analysis | CareerCompass AI</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+
+    <style>
+        .gap-intro {
+            margin-bottom: 24px;
+        }
+
+        .gap-form {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .gap-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .gap-form select,
+        .gap-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ded9f5;
+            border-radius: 10px;
+            font: inherit;
+            box-sizing: border-box;
+        }
+
+        .gap-form button {
+            justify-self: start;
+        }
+
+        .gap-summary {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin: 22px 0;
+        }
+
+        .gap-stat {
+            background: #f5f2ff;
+            border: 1px solid #e7e0ff;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .gap-stat strong {
+            display: block;
+            font-size: 26px;
+            color: #6956e8;
+            margin-bottom: 6px;
+        }
+
+        .gap-stat span {
+            color: #5f5a70;
+            font-size: 14px;
+        }
+
+        .gap-progress {
+            height: 10px;
+            background: #e9e5f5;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 12px 0 24px;
+        }
+
+        .gap-progress-fill {
+            height: 100%;
+            width: 0;
+            background: #6956e8;
+            transition: width 0.3s ease;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin: 18px 0 30px;
+        }
+
+        .skill-card {
+            border: 1px solid #e7e3f2;
+            border-radius: 14px;
+            padding: 18px;
+            background: white;
+            min-width: 0;
+        }
+
+        .skill-card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .skill-card p {
+            line-height: 1.6;
+            color: #625d70;
+            font-size: 14px;
+        }
+
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #f0edff;
+            color: #5140c7;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .skill-badge.complete {
+            background: #e5f8ed;
+            color: #187344;
+        }
+
+        .skill-resource {
+            display: inline-block;
+            margin-top: 5px;
+            color: #5140c7;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .skill-resource:hover {
+            text-decoration: underline;
+        }
+
+        .gap-note {
+            background: #faf9ff;
+            border-left: 4px solid #6956e8;
+            padding: 14px 16px;
+            border-radius: 8px;
+            color: #5f5a70;
+            line-height: 1.6;
+        }
+
+        .gap-section-title {
+            margin-top: 28px;
+        }
+
+        .gap-empty {
+            color: #625d70;
+            padding: 14px 0;
+        }
+
+        @media (max-width: 650px) {
+            .gap-summary,
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 <header>
     <h2>CareerCompass AI</h2>
-    <nav><a href="dashboard.html">Dashboard</a><a href="profile.html">Profile</a></nav>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+    </nav>
 </header>
 
 <main class="container">
-    <h1>Skill Gap Analysis</h1>
-    <p>Compare your existing skills with a target career's suggested skills.</p>
+    <section class="gap-intro">
+        <h1>Skill Gap Analysis</h1>
+        <p>
+            Discover the skills related to your target career, compare them
+            with your current skills, and find resources to start learning.
+        </p>
+    </section>
 
-    <form id="skillGapForm">
-        <label for="goal">Target Role</label>
-        <select id="goal">
-            <option value="Software Developer">Software Developer</option>
-            <option value="Full Stack Developer">Full Stack Developer</option>
-            <option value="AI Engineer">AI Engineer</option>
-            <option value="Data Analyst">Data Analyst</option>
-        </select>
+    <form id="skillGapForm" class="gap-form">
+        <div>
+            <label for="goal">Target Career Role</label>
+            <select id="goal" required>
+                <option value="Software Developer">Software Developer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="AI Engineer">AI Engineer</option>
+                <option value="Data Analyst">Data Analyst</option>
+            </select>
+        </div>
 
-        <label for="current">Your Current Skills</label>
-        <textarea id="current" rows="4" placeholder="Python, SQL, HTML"></textarea>
+        <div>
+            <label for="current">Your Current Skills</label>
+            <textarea
+                id="current"
+                rows="4"
+                placeholder="Example: Python, SQL, HTML, CSS"
+            ></textarea>
+            <small>Separate skills with commas.</small>
+        </div>
 
-        <button type="submit">Analyze Skills</button>
+        <button type="submit">Analyze My Skills</button>
     </form>
 
-    <section id="result" class="card" aria-live="polite"></section>
+    <section id="result" aria-live="polite">
+        <div class="card">
+            <h2>Ready to explore your skills?</h2>
+            <p>
+                Select your target role, enter your existing skills, and click
+                Analyze My Skills to view your skill cards and learning resources.
+            </p>
+        </div>
+    </section>
+
+    <p class="gap-note">
+        <strong>Note:</strong> These are technology areas to explore, not a
+        verified live ranking of job-market demand. The comparison is a basic
+        guide and does not guarantee job readiness.
+    </p>
 </main>
 
 <script>
-const requirements = {
-    "Software Developer": ["Programming", "DSA", "SQL", "Git", "Projects"],
-    "Full Stack Developer": ["HTML", "CSS", "JavaScript", "Backend", "SQL", "Git"],
-    "AI Engineer": ["Python", "Math", "Machine Learning", "Data Handling", "Projects"],
-    "Data Analyst": ["SQL", "Python", "Statistics", "Data Visualization", "Projects"]
-};
+(function () {
+    const requirements = {
+        "Software Developer": [
+            {
+                name: "Programming Fundamentals",
+                aliases: ["programming", "programming fundamentals", "c", "java", "python"],
+                description: "Learn variables, conditions, loops, functions, and problem-solving.",
+                level: "Beginner",
+                priority: "Foundation",
+                resource: "https://www.freecodecamp.org/learn/"
+            },
+            {
+                name: "Data Structures and Algorithms",
+                aliases: ["dsa", "data structures", "algorithms", "data structures and algorithms"],
+                description: "Practice arrays, strings, searching, sorting, and basic algorithm design.",
+                level: "Intermediate",
+                priority: "Core skill",
+                resource: "https://www.geeksforgeeks.org/"
+            },
+            {
+                name: "SQL",
+                aliases: ["sql", "mysql", "database", "databases"],
+                description: "Learn to store, retrieve, filter, and organize data using queries.",
+                level: "Beginner",
+                priority: "Core skill",
+                resource: "https://www.w3schools.com/sql/"
+            },
+            {
+                name: "Git and GitHub",
+                aliases: ["git", "github", "version control"],
+                description: "Track code changes and publish your projects in repositories.",
+                level: "Beginner",
+                priority: "Workflow",
+                resource: "https://docs.github.com/en/get-started"
+            },
+            {
+                name: "Practical Projects",
+                aliases: ["projects", "project development", "portfolio"],
+                description: "Build small applications to demonstrate your programming skills.",
+                level: "Intermediate",
+                priority: "Practice",
+                resource: "https://github.com/"
+            }
+        ],
 
-document.getElementById("skillGapForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+        "Full Stack Developer": [
+            {
+                name: "HTML",
+                aliases: ["html", "html5"],
+                description: "Structure web pages with semantic elements and accessible forms.",
+                level: "Beginner",
+                priority: "Foundation",
+                resource: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+            },
+            {
+                name: "CSS",
+                aliases: ["css", "css3", "responsive design"],
+                description: "Style pages using layouts, flexbox, grid, and responsive design.",
+                level: "Beginner",
+                priority: "Foundation",
+                resource: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+            },
+            {
+                name: "JavaScript",
+                aliases: ["javascript", "js"],
+                description: "Add interactivity and learn functions, events, arrays, and asynchronous code.",
+                level: "Beginner–Intermediate",
+                priority: "Core skill",
+                resource: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+            },
+            {
+                name: "Backend Development",
+                aliases: ["backend", "fastapi", "node", "node.js", "express", "django", "api", "apis"],
+                description: "Create server-side logic and APIs that connect the frontend to data.",
+                level: "Intermediate",
+                priority: "Core skill",
+                resource: "https://fastapi.tiangolo.com/tutorial/"
+            },
+            {
+                name: "SQL and Databases",
+                aliases: ["sql", "mysql", "sqlite", "postgresql", "database", "databases"],
+                description: "Design tables and manage application data with database queries.",
+                level: "Beginner–Intermediate",
+                priority: "Core skill",
+                resource: "https://www.w3schools.com/sql/"
+            },
+            {
+                name: "Git and GitHub",
+                aliases: ["git", "github", "version control"],
+                description: "Manage source-code history and collaborate using repositories.",
+                level: "Beginner",
+                priority: "Workflow",
+                resource: "https://docs.github.com/en/get-started"
+            }
+        ],
 
-    const role = document.getElementById("goal").value;
-    const current = document.getElementById("current").value
-        .split(",").map(skill => skill.trim().toLowerCase()).filter(Boolean);
+        "AI Engineer": [
+            {
+                name: "Python",
+                aliases: ["python", "python programming"],
+                description: "Build a strong foundation in Python syntax, functions, modules, and data structures.",
+                level: "Beginner",
+                priority: "Foundation",
+                resource: "https://docs.python.org/3/tutorial/"
+            },
+            {
+                name: "Mathematics and Statistics",
+                aliases: ["math", "mathematics", "statistics", "linear algebra", "probability"],
+                description: "Explore the mathematical ideas used to understand data and machine-learning models.",
+                level: "Intermediate",
+                priority: "Foundation",
+                resource: "https://www.khanacademy.org/math"
+            },
+            {
+                name: "Machine Learning",
+                aliases: ["machine learning", "ml", "scikit-learn"],
+                description: "Study model training, evaluation, and basic supervised learning methods.",
+                level: "Intermediate",
+                priority: "Core skill",
+                resource: "https://scikit-learn.org/stable/getting_started.html"
+            },
+            {
+                name: "Data Handling",
+                aliases: ["data handling", "pandas", "numpy", "data analysis"],
+                description: "Clean, transform, and explore datasets using Python tools.",
+                level: "Beginner–Intermediate",
+                priority: "Core skill",
+                resource: "https://pandas.pydata.org/docs/getting_started/"
+            },
+            {
+                name: "AI Projects",
+                aliases: ["projects", "ai projects", "machine learning projects", "portfolio"],
+                description: "Apply concepts to small projects and document your results.",
+                level: "Intermediate",
+                priority: "Practice",
+                resource: "https://github.com/"
+            }
+        ],
 
-    const required = requirements[role];
-    const matched = required.filter(skill =>
-        current.some(item => item.includes(skill.toLowerCase()) ||
-                             skill.toLowerCase().includes(item))
-    );
-    const missing = required.filter(skill => !matched.includes(skill));
-    const score = Math.round((matched.length / required.length) * 100);
+        "Data Analyst": [
+            {
+                name: "SQL",
+                aliases: ["sql", "mysql", "postgresql", "sqlite", "database"],
+                description: "Query, filter, group, and summarize information stored in databases.",
+                level: "Beginner",
+                priority: "Foundation",
+                resource: "https://www.w3schools.com/sql/"
+            },
+            {
+                name: "Python for Data Analysis",
+                aliases: ["python", "pandas", "numpy", "data analysis"],
+                description: "Use Python libraries to inspect, clean, and analyze datasets.",
+                level: "Beginner–Intermediate",
+                priority: "Core skill",
+                resource: "https://pandas.pydata.org/docs/getting_started/"
+            },
+            {
+                name: "Statistics",
+                aliases: ["statistics", "probability", "descriptive statistics"],
+                description: "Understand averages, distributions, variability, and basic statistical reasoning.",
+                level: "Beginner–Intermediate",
+                priority: "Foundation",
+                resource: "https://www.khanacademy.org/math/statistics-probability"
+            },
+            {
+                name: "Data Visualization",
+                aliases: ["data visualization", "visualization", "power bi", "tableau", "matplotlib", "excel charts"],
+                description: "Turn data into charts and dashboards that communicate findings clearly.",
+                level: "Beginner–Intermediate",
+                priority: "Core skill",
+                resource: "https://public.tableau.com/"
+            },
+            {
+                name: "Portfolio Projects",
+                aliases: ["projects", "portfolio", "data projects"],
+                description: "Create analysis projects that explain the question, method, and results.",
+                level: "Intermediate",
+                priority: "Practice",
+                resource: "https://github.com/"
+            }
+        ]
+    };
 
-    document.getElementById("result").innerHTML = `
-        <h2>Analysis Results</h2>
-        <p>Target role: ${role}</p>
-        <p>Suggested skill coverage: ${score}%</p>
-        <h3>Skills to focus on</h3>
-        <p>${missing.length ? missing.join(", ") : "You entered all the listed skills."}</p>
-        <p>These results are a basic local comparison, not an official job-readiness score.</p>
-    `;
-});
+    const form = document.getElementById("skillGapForm");
+    const result = document.getElementById("result");
+    const currentInput = document.getElementById("current");
+    const goalInput = document.getElementById("goal");
+
+    if (!form || !result || !currentInput || !goalInput) return;
+
+    function normalize(value) {
+        return value.trim().toLowerCase();
+    }
+
+    function isSkillPresent(skill, currentSkills) {
+        return currentSkills.some(function (entered) {
+            return skill.aliases.some(function (alias) {
+                return normalize(alias) === entered ||
+                    normalize(alias).includes(entered) ||
+                    entered.includes(normalize(alias));
+            }) || normalize(skill.name) === entered;
+        });
+    }
+
+    function makeSkillCard(skill, isMatched) {
+        const card = document.createElement("article");
+        card.className = "skill-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = skill.name;
+
+        const description = document.createElement("p");
+        description.textContent = skill.description;
+
+        const badges = document.createElement("div");
+        badges.className = "skill-badges";
+
+        const level = document.createElement("span");
+        level.className = "skill-badge";
+        level.textContent = skill.level;
+
+        const priority = document.createElement("span");
+        priority.className = "skill-badge";
+        priority.textContent = skill.priority;
+
+        const status = document.createElement("span");
+        status.className = "skill-badge " + (isMatched ? "complete" : "");
+        status.textContent = isMatched ? "Already listed" : "To explore";
+
+        badges.append(level, priority, status);
+
+        const link = document.createElement("a");
+        link.className = "skill-resource";
+        link.href = skill.resource;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Explore learning resource →";
+
+        card.append(heading, description, badges, link);
+        return card;
+    }
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const role = goalInput.value;
+        const currentSkills = currentInput.value
+            .split(",")
+            .map(normalize)
+            .filter(Boolean);
+
+        const required = requirements[role] || [];
+        const matched = required.filter(function (skill) {
+            return isSkillPresent(skill, currentSkills);
+        });
+
+        const missing = required.filter(function (skill) {
+            return !isSkillPresent(skill, currentSkills);
+        });
+
+        const score = required.length
+            ? Math.round((matched.length / required.length) * 100)
+            : 0;
+
+        result.replaceChildren();
+
+        const heading = document.createElement("h2");
+        heading.textContent = "Your Skill Gap Overview";
+
+        const roleText = document.createElement("p");
+        roleText.textContent = "Target role: " + role;
+
+        const summary = document.createElement("div");
+        summary.className = "gap-summary";
+
+        [
+            { number: score + "%", label: "Listed skill coverage" },
+            { number: matched.length, label: "Skills matched" },
+            { number: missing.length, label: "Skills to explore" }
+        ].forEach(function (stat) {
+            const box = document.createElement("div");
+            box.className = "gap-stat";
+
+            const number = document.createElement("strong");
+            number.textContent = stat.number;
+
+            const label = document.createElement("span");
+            label.textContent = stat.label;
+
+            box.append(number, label);
+            summary.appendChild(box);
+        });
+
+        const progress = document.createElement("div");
+        progress.className = "gap-progress";
+        progress.setAttribute("role", "progressbar");
+        progress.setAttribute("aria-valuemin", "0");
+        progress.setAttribute("aria-valuemax", "100");
+        progress.setAttribute("aria-valuenow", String(score));
+        progress.setAttribute("aria-label", "Listed skill coverage");
+
+        const fill = document.createElement("div");
+        fill.className = "gap-progress-fill";
+        fill.style.width = score + "%";
+        progress.appendChild(fill);
+
+        const missingHeading = document.createElement("h2");
+        missingHeading.className = "gap-section-title";
+        missingHeading.textContent = "Skills to Focus On";
+
+        const missingDescription = document.createElement("p");
+        missingDescription.textContent = missing.length
+            ? "Explore these areas and choose what to learn next."
+            : "You listed all the skills in this basic guide.";
+
+        const missingGrid = document.createElement("div");
+        missingGrid.className = "skill-grid";
+
+        missing.forEach(function (skill) {
+            missingGrid.appendChild(makeSkillCard(skill, false));
+        });
+
+        if (!missing.length) {
+            missingGrid.className = "gap-empty";
+            missingGrid.textContent = "No listed skill gaps found for this guide.";
+        }
+
+        const matchedHeading = document.createElement("h2");
+        matchedHeading.className = "gap-section-title";
+        matchedHeading.textContent = "Skills You Already Listed";
+
+        const matchedGrid = document.createElement("div");
+        matchedGrid.className = "skill-grid";
+
+        matched.forEach(function (skill) {
+            matchedGrid.appendChild(makeSkillCard(skill, true));
+        });
+
+        if (!matched.length) {
+            matchedGrid.className = "gap-empty";
+            matchedGrid.textContent =
+                "No matching skills entered yet. Add your current skills above and analyze again.";
+        }
+
+        const note = document.createElement("p");
+        note.className = "gap-note";
+        note.textContent =
+            "This is a basic comparison against a locally defined skill list. " +
+            "It is not a verified live job-market ranking or an official job-readiness score.";
+
+        result.append(
+            heading,
+            roleText,
+            summary,
+            progress,
+            missingHeading,
+            missingDescription,
+            missingGrid,
+            matchedHeading,
+            matchedGrid,
+            note
+        );
+
+        result.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+})();
 </script>
 </body>
 </html>
+```

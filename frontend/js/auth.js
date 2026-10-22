@@ -72,10 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         JSON.stringify(result.user)
                     );
                 }
-
                 showMessage(loginForm, "Login successful! Opening dashboard...");
 
-                window.location.href = "dashboard.html";
+window.location.href = "dashboard-design-test.html";
+
 
             } catch (error) {
                 console.error("Login error:", error);
